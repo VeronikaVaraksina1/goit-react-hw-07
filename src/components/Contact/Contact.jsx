@@ -1,23 +1,37 @@
-import { useDispatch } from 'react-redux';
 import css from './Contact.module.css';
-
+import { deleteContact } from '../../redux/contactsOps';
+import { useDispatch } from 'react-redux';
 import { ImUser, ImPhone, ImUserMinus } from 'react-icons/im';
-import { deleteContact } from '../../redux/contactsSlice';
+import toast from 'react-hot-toast';
 
 const Contact = ({ data: { id, name, number } }) => {
   const dispatch = useDispatch();
 
   return (
     <div className={css.container}>
-      <p className={css.name}>
-        <ImUser className={css.icon} />
-        {name}
-      </p>
-      <p>
-        <ImPhone className={css.icon} />
-        {number}
-      </p>
-      <button className={css.button} onClick={() => dispatch(deleteContact(id))}>
+      <div>
+        <p className={css.name}>
+          <ImUser className={css.icon} />
+          {name}
+        </p>
+        <p>
+          <ImPhone className={css.icon} />
+          {number}
+        </p>
+      </div>
+      <button
+        className={css.button}
+        onClick={() =>
+          dispatch(deleteContact(id))
+            .unwrap()
+            .then(() => {
+              toast.success('Contact deleted');
+            })
+            .catch(() => {
+              toast.error('The contact has not been deleted. Reload the page');
+            })
+        }
+      >
         <ImUserMinus />
       </button>
     </div>
