@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  width: 200px;
+  padding: 16px;
+  border: 1px solid #ad865a;
+  border-radius: 8px;
+  background-color: #f0e6dc;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.name {
+  font-style: italic;
+  font-weight: 600;
+}
+
+.button {
+  display: block;
+
+  width: 45px;
+  padding: 6px 4px;
+  border: 1px solid #c66a61;
+  border-radius: 15px;
+
+  background-color: #d88f86;
+  transform: translate(278%);
+  transition: background-color 250ms ease-in;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #c66a61;
+}
