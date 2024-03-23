@@ -3,7 +3,7 @@ import ContactList from '../ContactList/ContactList';
 import SearchBox from '../SearchBox/SearchBox';
 import ContactForm from '../ContactForm/ContactForm';
 import Loader from '../Loader/Loader';
-import Error from '../Error/Error';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from '../../redux/contactsOps';
@@ -29,7 +29,7 @@ const App = () => {
       <ContactForm />
       <SearchBox />
       {loading && <Loader />}
-      {error && <Error />}
+      {error && <ErrorMessage>Something went wrong! Please reload the page 🚩</ErrorMessage>}
       <ContactList />
       <Toaster />
     </div>
