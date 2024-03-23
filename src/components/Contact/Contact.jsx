@@ -7,6 +7,17 @@ import toast from 'react-hot-toast';
 const Contact = ({ data: { id, name, number } }) => {
   const dispatch = useDispatch();
 
+  const handleDelete = () => {
+    dispatch(deleteContact(id))
+      .unwrap()
+      .then(() => {
+        toast.success('Contact deleted');
+      })
+      .catch(() => {
+        toast.error('The contact has not been deleted. Reload the page');
+      });
+  };
+
   return (
     <div className={css.container}>
       <div>
@@ -19,19 +30,7 @@ const Contact = ({ data: { id, name, number } }) => {
           {number}
         </p>
       </div>
-      <button
-        className={css.button}
-        onClick={() =>
-          dispatch(deleteContact(id))
-            .unwrap()
-            .then(() => {
-              toast.success('Contact deleted');
-            })
-            .catch(() => {
-              toast.error('The contact has not been deleted. Reload the page');
-            })
-        }
-      >
+      <button className={css.button} onClick={handleDelete}>
         <ImUserMinus />
       </button>
     </div>

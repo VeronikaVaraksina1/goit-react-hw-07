@@ -8,6 +8,10 @@ const SearchBox = () => {
   const dispatch = useDispatch();
   const value = useSelector(selectNameFilter);
 
+  const handleChange = e => {
+    dispatch(changeFilter(e.target.value));
+  };
+
   return (
     <div className={css.container}>
       <label className={css.text} htmlFor={elementId}>
@@ -18,7 +22,7 @@ const SearchBox = () => {
         type="text"
         id={elementId}
         value={value}
-        onChange={e => dispatch(changeFilter(e.target.value))}
+        onChange={handleChange}
       />
     </div>
   );

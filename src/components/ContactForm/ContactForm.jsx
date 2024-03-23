@@ -17,6 +17,17 @@ const ContactForm = () => {
 
   const dispatch = useDispatch();
 
+  const handleSubmit = newContact => {
+    dispatch(addContact(newContact))
+      .unwrap()
+      .then(() => {
+        toast.success('Contact added');
+      })
+      .catch(() => {
+        toast.error('The contact has not been added. Reload the page');
+      });
+  };
+
   return (
     <Formik
       initialValues={{ id: '', name: '', number: '' }}
@@ -26,14 +37,7 @@ const ContactForm = () => {
           name: values.name,
           number: values.number,
         };
-        dispatch(addContact(newContact))
-          .unwrap()
-          .then(() => {
-            toast.success('Contact added');
-          })
-          .catch(() => {
-            toast.error('The contact has not been added. Reload the page');
-          });
+        handleSubmit(newContact);
         actions.resetForm();
       }}
       validationSchema={ContactSchema}
